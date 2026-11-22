@@ -1,59 +1,55 @@
-# tabdelay
-TabDelay mirrors an Edge tab's audio/video to PotPlayer on Windows with a configurable delay, like a local screen-record-and-rebroadcast. Useful for A/V sync and aligning browser playback with external sources.
-TabDelay
+# TabDelay
 
-First-Time Setup
+## 第一次使用
 
-1. Install Python 3.10 or later (check "Add Python to PATH" during installation).
-2. In Edge, open edge://extensions, or open the extensions page via Settings, and enable Developer mode.
-3. Click "Load unpacked extension" and select the extension folder inside this directory.
-4. Double-click 点这个使用.pyw ("Double-click to Run.pyw") in this folder.
-5. Download PotPlayer. Updating it is optional.
-6. The installer is included in the folder.
+1. 安装 Python 3.10 或更高版本（安装时勾选 Add Python to PATH）。
+2. Edge 打开 edge://extensions，开启开发者模式。
+3. 加载解压缩的扩展，选择本文件夹下的 extension。
+4. 双击本文件夹里的 TabDelay.pyw。
 
-After double-clicking, the following will happen:
-- The local server starts.
-- http://127.0.0.1:17392/ opens automatically.
-- Closing the control page will automatically stop the server and PotPlayer.
-- The extension must be disabled manually.
+双击后会：
+- 启动本地服务端；
+- 自动打开 http://127.0.0.1:17392/；
+- 关闭控制页后自动停止服务端和 PotPlayer；
+- 插件要手动关闭
 
-If double-clicking the .pyw file does nothing, it means .pyw is not associated with pythonw. Create a shortcut instead and set its target to:
-pythonw.exe "ThisFolder点这个使用.pyw"
+如果双击 .pyw 没反应，说明 .pyw 没有关联到 pythonw。可以新建快捷方式，目标填：
+pythonw.exe "本文件夹\TabDelay.pyw"
 
-Usage
+## 使用
 
-1. On the control page, first select either "Video + Audio" or "Audio Only".
-2. On the page you want to delay, click the extension icon to begin capturing.
-3. Wait for the buffer to fill, select the delay in seconds, then click "Apply Delay & Start".
-4. PotPlayer will launch automatically.
+1. 先在控制页选“视频+音频”或“纯音频”；
+2. 在要延迟的页面点扩展图标开始采集；
+3. 等缓存完成，选延迟秒数，点“应用延迟并开始”；
+4. PotPlayer 会自动打开。
 
-After switching modes, you must click the extension icon again to restart capture. The page will detect a mode mismatch and block startup, instead of getting stuck buffering indefinitely.
+切换模式后必须重新点扩展图标开始；页面会检测模式不一致并阻止启动，不会一直卡在缓存。
 
-Exit
+## 退出
 
-Simply close the control page tab.
-The server and PotPlayer will shut down automatically after about 8 seconds.
-Once the extension detects that the server has gone, it will stop capturing and unmute the tab.
+直接关闭控制页标签。
+约 8 秒后服务端和 PotPlayer 自动退出。
+扩展检测到服务端消失后会自动停止采集并解除标签页静音。
 
-Port Conflict
+## 端口冲突
 
-If port 17392 or 17393 is already in use, a dialog will display:
+如果 17392 或 17393 被占用，会弹窗显示：
 - PID
-- Process name
+- 进程名
 
-Close the program using the port, then double-click 点这个使用.pyw again.
+关闭占用程序后再双击 TabDelay.pyw。
 
-To check manually:
+手动查看：
 netstat -ano | findstr :17392
 
-Known Limitations
+## 已知限制
 
-- Only Windows, Edge, and PotPlayer are supported.
-- The extension must be loaded manually on first use.
-- Background or minimized tabs may be throttled to 10–20 fps by Edge.
-- Hardware H.264 encoding is preferred; it falls back to software encoding when hardware encoding is unavailable.
-- The maximum buffer duration is about 65 seconds.
+- 仅支持 Windows、Edge、PotPlayer。
+- 扩展需要第一次手动加载。
+- 后台/最小化标签页可能被 Edge 限制在 10–20fps。
+- 视频优先硬件 H.264，硬件不可用时回退软件编码。
+- 缓存约 65 秒。
 
-Compliance Notice
+## 合规提示
 
-This tool only provides local assistance for page playback in your browser. Please use it in a lawful and compliant manner, and confirm on your own that your usage complies with the terms, rules, and applicable laws of any website or service you use. Do not use it for any purpose that may infringe upon others' legitimate rights or violate relevant agreements or laws and regulations. All consequences arising from use are borne solely by the user; if you do not agree, stop using it immediately.
+本工具仅提供本机浏览器页面播放的辅助处理功能。请在合法、合规的前提下使用，并自行确认符合所使用网站或服务的协议、规则以及适用法律。请勿用于可能侵犯他人合法权益、违反相关协议或法律法规的用途。使用产生的一切后果由使用者自行承担；如不同意，请立即停止使用。
